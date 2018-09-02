@@ -32,9 +32,6 @@ def save_data():
 
 class PlayerData:
 
-	# nível mais longe
-	# melhor tempo nos mapas
-
 	def __init__(self, times):
 		self.times = times
 

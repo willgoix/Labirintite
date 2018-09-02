@@ -24,7 +24,6 @@ class GUI:
 			for x in self.buttons[y]:
 				self.buttons[y][x].adapt(y, self)
 				
-				#if not self.buttons[y][x].name == 'blank':
 				self.buttons[y][x].update(self.y == y and self.x == x)
 
 		# Evitar bugs caso o tamanho da janela do console seja mudado
@@ -35,27 +34,20 @@ class GUI:
 
 	def update(self):
 		keyword = console.getKeyword().lower();
-		r = ''
 
 		if (keyword == 'up' or keyword == 'w'):
-			r = 'up'
 			self.up()
 		elif (keyword == 'down' or keyword == 's'):
-			r = 'down'
 			self.down();
 		elif (keyword == 'left' or keyword == 'a'):
-			r = 'left'
 			self.left();
 		elif (keyword == 'right' or keyword == 'd'):
-			r = 'right'
 			self.right();
 		elif (keyword == 'enter' or keyword == 's' or keyword == 'w'):
-			r = 'click'
 			self.click()
 
-			# Evitar bugs caso o tamanho da janela do console seja mudado
+		# Evitar bugs caso o tamanho da janela do console seja mudado
 		console.setColor(Colors.BACKGROUND_BLACK | Colors.FOREGROUND_WHITE)
-			#return r
 
 	def up(self):
 		oldButton = self.buttons[self.y][self.x]
@@ -77,7 +69,6 @@ class GUI:
 		oldButton.update(False)
 
 		if self.y + 1 >= len(self.buttons) or self.y + 1 in self.buttons and not self.x in self.buttons[self.y + 1]:
-		#if not self.y + 1 in self.buttons:
 			lower = 10000
 			for y in self.buttons:
 				if y < lower and self.x in self.buttons[y]:
@@ -126,19 +117,7 @@ class GUI:
 		selectedButton = self.buttons[self.y][self.x]
 		selectedButton.click()
 
-	# Y e X representam o posicionamento de uma matriz imaginaria dos botões.
-	# Ambos podem ser editados simultaneamente na formação BOTH (ambos), onde você fica
-	# livre para editar o posicionamento. (os posicionamentos que você não utilizar serão
-	# preenchidos com um GUIButton('blank'), vazio)
-
 	def addButton(self, Y, X, button):
-		#if len(self.buttons) == 0:
-		#	self.buttons[0] = {}
-
-		#se y1 x5
-		#preencher y0, x0, x1, x2, x3, x4
-		#sabendo que len(button.composition) = 4
-
 		for y in range(0, Y + 1):
 			if not y in self.buttons:
 				self.buttons[y] = {}
@@ -146,7 +125,6 @@ class GUI:
 				if not y == Y:
 					self.buttons[y][0] = GUIButton('blank')
 
-#		for lineY in range(Y, Y + len(button.composition)):
 		for x in range(0, X):
 			if not x in self.buttons[Y]:
 				composition = []
@@ -154,7 +132,6 @@ class GUI:
 					composition.append(' ')
 
 				self.buttons[Y][x] = GUIButton('blank', composition)
-
 
 		self.buttons[Y][X] = button
 
@@ -184,17 +161,8 @@ class GUIButton:
 
 		for y in range(0, len(self.composition)):
 			adaptedY = Y + y
-
-			#if GUIButton.lastY + 1 >= len(gui.buttons):
-			#	GUIButton.lastY += 1
-			#	adaptedY = GUIButton.lastY
-			#else:
-			#	GUIButton.lastY += 1
-			#	adaptedY = GUIButton.lastY
-
 			adaptedComposition[adaptedY] = {}
 
-			#ler letras da linha
 			for x in range(0, len(self.composition[y])):
 				adaptedX = 0
 
@@ -206,7 +174,6 @@ class GUIButton:
 					adaptedX = x
 
 				adaptedComposition[adaptedY][adaptedX] = self.composition[y][x]
-		#GUIButton.lastY = Y + len(self.composition)
 		self.composition = adaptedComposition
 
 	def click(self):

@@ -12,7 +12,6 @@ class Map:
 		self.composition = composition
 
 	def save(self):
-		#Criar pasta \maps caso não exista
 		if not os.path.isdir(os.getcwd() + "\\maps\\"):
 			os.mkdir(os.getcwd() + "\\maps\\")
 
